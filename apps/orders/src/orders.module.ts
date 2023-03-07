@@ -14,13 +14,14 @@ import { Order, OrderSchema } from './schemas/order.shema';
       isGlobal: true,
       validationSchema: Joi.object({
         MONGODB_URI: Joi.string().required(),
+        PORT: Joi.number().required(),
       }),
       envFilePath: './apps/orders/.env',
     }),
     DatabaseModule,
     MongooseModule.forFeature([{ name: Order.name, schema: OrderSchema }]),
   ],
-  controllers: [OrdersController, OrdersRepository],
-  providers: [OrdersService],
+  controllers: [OrdersController],
+  providers: [OrdersService, OrdersRepository],
 })
 export class OrdersModule {}
